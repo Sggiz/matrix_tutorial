@@ -12,7 +12,7 @@ Matrices are represented by C structures, implemented as follows:
         scalar *data;
     } matrix;
 
-The `ok` boolean attribute indicates whether the matrice is valid. `n1` and `n2` represent the matrix' size and `data` holds the matrix' scalars (implemented as doubles).
+The `ok` boolean attribute indicates whether the matrix is valid. `n1` and `n2` represent the matrix' size and `data` holds the matrix' scalars (implemented as doubles).
 
 
 ### Functions
