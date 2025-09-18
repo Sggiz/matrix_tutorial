@@ -85,6 +85,10 @@ void matrix_print(FILE *f, matrix m)
 
 matrix matrix_product(matrix m1, matrix m2){
   matrix m = matrix_create(m1.n1,m2.n2,0.);
+  if(m1.n2 <> m2.n1){
+    m.ok = false;
+    return m;
+  }
   for(int i = 0; i<m1.n1; i++){
     for(int j = 0; j<m2.n2; j++){
       for(int k = 0; k<m1.n2; k++){
@@ -95,10 +99,11 @@ matrix matrix_product(matrix m1, matrix m2){
   return m;
 }
 
-
 matrix matrix_exponant(matrix m, int b){
   matrix res;
-  if(b == 0){
+  if(m.n1 <> m.n2){
+    res.ok = false;
+  } else if(b == 0){
     res = matrix_identity(m.n1);
   } else if(b%2 == 0){
     matrix n_m = matrix_product(m,m);
