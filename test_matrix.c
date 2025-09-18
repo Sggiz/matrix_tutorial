@@ -84,6 +84,15 @@ UTEST(matrix_exponant, wrong) {
   matrix_destroy(m);
   matrix_destroy(mm);
   ASSERT_FALSE(b);
+
+UTEST(matrix_scalar, simple) {
+  matrix m = matrix_create(1, 1, 10.);
+  matrix nprime = matrix_create(1, 1, 2.);
+  matrix n = matrix_scalar(5., nprime);
+  ASSERT_EQ(*matrix_get(m,0,0), *matrix_get(n,0,0));
+  matrix_destroy(m);
+  matrix_destroy(nprime);
+  matrix_destroy(n);
 }
 
 UTEST_MAIN()  

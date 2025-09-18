@@ -67,6 +67,20 @@ matrix matrix_add(matrix m, matrix n)
   return res;
 }
 
+matrix matrix_scalar(double a, matrix m) {
+  matrix res={0,0,false,NULL};
+
+  if (!m.ok)
+    return res;
+  
+  res = matrix_create(m.n1, m.n2, 0.);
+  for(unsigned i=0; i<m.n1; ++i)
+    for(unsigned j=0; j<m.n2; ++j)
+      *matrix_get(res, i, j) = a * *matrix_get(m, i, j);
+
+  return res;
+}
+
 void matrix_print(FILE *f, matrix m)
 {
   if(!m.ok)
