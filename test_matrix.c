@@ -56,4 +56,10 @@ UTEST(matrix_get, wrong) {
   ASSERT_TRUE(matrix_get(m, 0, 0)==NULL);
 }
 
+UTEST(matrix_scalar, simple) {
+  matrix m = matrix_create(1, 1, 10.);
+  matrix n = matrix_scalar(5., matrix_create(1, 1, 2.));
+  ASSERT_EQ(*matrix_get(m,0,0), *matrix_get(n,0,0));
+}
+
 UTEST_MAIN()  
