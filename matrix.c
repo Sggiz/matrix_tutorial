@@ -96,3 +96,40 @@ void matrix_print(FILE *f, matrix m)
     }
   }
 }
+
+matrix matrix_product(matrix m1, matrix m2){
+  matrix m = matrix_create(m1.n1,m2.n2,0.);
+  if(m1.n2 != m2.n1){
+    m.ok = false;
+    return m;
+  }
+  for(unsigned int i = 0; i<m1.n1; i++){
+    for(unsigned int j = 0; j<m2.n2; j++){
+      for(unsigned int k = 0; k<m1.n2; k++){
+        *matrix_get(m,i,j) += *matrix_get(m1,i,k)*(*matrix_get(m2,k,j));
+      }
+    }
+  }
+  return m;
+}
+
+matrix matrix_exponant(matrix m, int b){
+  matrix res;
+  if(m.n1 != m.n2){
+    res.ok = false;
+  } else if(b == 0){
+    res = matrix_identity(m.n1);
+  } else if(b%2 == 0){
+    matrix n_m = matrix_product(m,m);
+    res = matrix_exponant(n_m,b/2);
+    matrix_destroy(n_m);
+    return res;
+  } else {
+    matrix n_m = matrix_product(m,m);
+    matrix n_n_m = matrix_product(n_m,m);
+    res = matrix_exponant(n_n_m,(b-1)/2);
+    matrix_destroy(n_m);
+    matrix_destroy(n_n_m);
+  }
+  return res;
+}

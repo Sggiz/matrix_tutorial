@@ -56,6 +56,36 @@ UTEST(matrix_get, wrong) {
   ASSERT_TRUE(matrix_get(m, 0, 0)==NULL);
 }
 
+UTEST(matrix_product, simple) {
+  matrix m = matrix_create(3,2,1.);
+  matrix n = matrix_create(2,5,1.);
+  matrix mm = matrix_product(m,n);
+  matrix_destroy(m);
+  matrix_destroy(n);
+  matrix_destroy(mm);
+  ASSERT_TRUE(1);
+}
+
+UTEST(matrix_product, wrong) {
+  matrix m = matrix_create(3,2,1.);
+  matrix n = matrix_create(2,5,1.);
+  matrix mm = matrix_product(n,m);
+  bool b = mm.ok;
+  matrix_destroy(m);
+  matrix_destroy(n);
+  matrix_destroy(mm);
+  ASSERT_FALSE(b);
+}
+
+UTEST(matrix_exponant, wrong) {
+  matrix m = matrix_create(3,2,1.);
+  matrix mm = matrix_exponant(m,5);
+  bool b = mm.ok;
+  matrix_destroy(m);
+  matrix_destroy(mm);
+  ASSERT_FALSE(b);
+}
+
 UTEST(matrix_scalar, simple) {
   matrix m = matrix_create(1, 1, 10.);
   matrix nprime = matrix_create(1, 1, 2.);

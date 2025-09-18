@@ -21,5 +21,7 @@ matrix matrix_scalar(double a, matrix m);
 void matrix_print(FILE *f, matrix m);
 
 matrix add_matrix(matrix m, matrix n);
+matrix matrix_product(matrix m, matrix n);
+matrix matrix_exponant(matrix m, int b);
 
 #endif /* MATRIX_H */
